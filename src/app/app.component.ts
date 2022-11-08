@@ -1,32 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // Importer élément besoin pour librairie ==> construire composant via angular
+import { POKEMONS } from './mock-pokemon-list';
+import { Pokemon } from './pokemon';
 
-@Component({
-  selector: 'app-root',
-  template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <span style="display: block">{{ title }} app is running!</span>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    <router-outlet></router-outlet>
-  `,
-  styles: []
+@Component({ // Constuire composant web
+  selector: 'app-root', // Nom du composant (balise)
+  templateUrl: 'app.component.html' // Définir code html associé à ce composant
 })
-export class AppComponent {
-  title = 'ng-pokemon-app';
+export class AppComponent implements OnInit{ // Décrire des proprités pour un composant
+  pokemons: Pokemon[] = POKEMONS; //Forcer typage en utilisant le type pokemon
+  pokemonSelected: Pokemon|undefined; //Le pokémon peut être indéfini
+
+  ngOnInit(): void{ // Typage typeScript ==> methode qui ne renvoi rien ==> on peut le supprimer
+    console.table(this.pokemons); //this car methode ne connait pas pokemons ici
+  }
+
+  selectPokemon(pokemonId: Pokemon){
+    const id = +pokemonId;
+    const pokemon: Pokemon|undefined = this.pokemons.find(pokemon => pokemon.id == +pokemonId); // |undefined car le find peut renvoyer null donc mettre les deux deux types ==> pokemon et undefined
+    if(pokemon){
+      this.pokemonSelected = pokemon;
+      console.log(`Vous avez cliqué sur le pokémon ${pokemon.name}`);
+    }
+
+    else{
+      this.pokemonSelected = pokemon;
+      console.log("Ce pokémon n'est pas présent");
+    }   
+  }
+
+  /*selectPokemon(pokemon: Pokemon){
+    console.log(`Vous avez cliqué sur le pokémon ${pokemon.name}`);
+    //console.log('Vous avez cliqué sur le pokémon ' + pokemonName);
+  }*/
+
+  /*selectPokemon(event: MouseEvent){ // Ancienne version
+    const index: number = +(event.target as HTMLInputElement).value
+    console.log(`Vous avez cliqué sur le pokémon ${this.pokemons[index].name}`);
+  }*/
 }
+// Composant : classe + vue
+// Interpolation = classe composant vers templates(app.component.html)
+// ==> mécanisme utilisé en général mais il existe d'autres façon de faire
+// Caster string to number ==> number() ou simplement + devant la chaine
+// Attention cast null to number ==> 0
+
+// Les directives :
+// Qu'est-ce qu'une directive ? ==> Classe angular qui ressemble à un composant mais sans template
+// Au lieu d'utiliser @component ==> @directive
+// Permet d'intéragir avec les éléments HTML d'une page en leur attachant un comportement spécifique
+// On peut avoir plusieurs directives, appliquées à un même élément
+
+// Type de directives :
+// 1. Les composants
+// ==> app.component.ts est une directive
+// 2. Les directives d'attributs ==> representé par des attributs au sein de balise HTML
+// 3. Directives structurelles
+// ==> Responsable de mettre en forme les éléments HTML d'une page, en manipulant des éléments et leurs fils
+// ngFor ou ngIf sont des directives structurelles
+
+// Qu'est-ce qu'un pipe ? 
+// Fonctionnalité permettant d'effectuer des transformation plus facilement dans nos templates
+// Par ex : ==> formater des dates pour affichage plus correct
+// ==> Opérateur pipe = | à placer à droite de l'élément à transformer
+// Ex : ==> pokemon.created | date
+// date fait partie des pipes par défaut présent sur Angular, comme d'autres
