@@ -4,10 +4,11 @@ import { BrowserModule } from '@angular/platform-browser'; // Element essentiel 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BorderCardDirective } from './border-card.directive';
+import { PokemonTypeColorPipe } from './pokemon-type-color.pipe';
 
 @NgModule({
   declarations: [ // Liste composants de ce module
-    AppComponent, BorderCardDirective
+    AppComponent, BorderCardDirective, PokemonTypeColorPipe
   ],
   imports: [ // Importer élément d'autres modules
     BrowserModule,

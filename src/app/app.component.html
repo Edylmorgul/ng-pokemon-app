@@ -9,7 +9,9 @@
                 <div class="card-stacked">
                     <div class="card-content">
                         <p id="pkmName"> {{pokemon.name}}</p>
-                        <p><small>{{pokemon.created | date}}</small></p>
+                        <p><small>{{pokemon.created | date:"dd/MM/yyyy"}}</small></p>
+                        <!--<p><small>{{pokemon.created | date:"dd/MM/yyyy"  | uppercase}}</small></p> -->
+                        <span *ngFor="let type of pokemon.types" class="{{type | pokemonTypeColor}}">{{type}}</span>
                     </div>
                 </div>
             </div>

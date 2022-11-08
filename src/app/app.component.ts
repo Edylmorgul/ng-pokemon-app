@@ -64,3 +64,5 @@ export class AppComponent implements OnInit{ // Décrire des proprités pour un 
 // ==> Opérateur pipe = | à placer à droite de l'élément à transformer
 // Ex : ==> pokemon.created | date
 // date fait partie des pipes par défaut présent sur Angular, comme d'autres
+// Plusieurs pipes peuvent se suivre pour un même élément
+// Les pipes sont pratiques pour formater des données jugées trop brute à l'intérieur de nos templates
