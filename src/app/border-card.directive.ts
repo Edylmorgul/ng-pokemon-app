@@ -8,7 +8,7 @@ export class BorderCardDirective {
   private initialColor: string = '#f5f5f5';
   private defaultColor: string = '#009688';
   private defaultHeight: number = 180;
-  private initialZoomScale: number = 1.12;
+  private initialZoomScale: number = 1.05;
   private defaultZoomScale: number = 1;
   private defaultTransition : string = '0.3s ease-in-out';
 

@@ -1,7 +1,7 @@
 <div class="container"> <!-- Centrer contenu gérer par materialize-->
     <div class="row"> <!-- Mettre en place le responsive de la page (12 unité)-->
         <div *ngFor="let pokemon of pokemons" class="col m4 s6"> 
-            <div class="card horizontal" pokemonBorderCard>
+            <div (click)=" goToPokemonView(pokemon)" class="card horizontal" pokemonBorderCard>
                 <div class="card-image">
                     <img [src]="pokemon.picture">
                 </div>
