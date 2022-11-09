@@ -1,32 +1,28 @@
-import { Component, OnInit } from '@angular/core'; // Importer élément besoin pour librairie ==> construire composant via angular
-import { POKEMONS } from './mock-pokemon-list';
-import { Pokemon } from './pokemon';
+import { Component} from '@angular/core'; // Importer élément besoin pour librairie ==> construire composant via angular
 
 @Component({ // Constuire composant web
   selector: 'app-root', // Nom du composant (balise)
   templateUrl: 'app.component.html' // Définir code html associé à ce composant
 })
-export class AppComponent implements OnInit{ // Décrire des proprités pour un composant
-  pokemons: Pokemon[] = POKEMONS; //Forcer typage en utilisant le type pokemon
-  pokemonSelected: Pokemon|undefined; //Le pokémon peut être indéfini
+export class AppComponent{ // Décrire des proprités pour un composant
+  //pokemons: Pokemon[] = POKEMONS; //Forcer typage en utilisant le type pokemon
+  //pokemonSelected: Pokemon|undefined; //Le pokémon peut être indéfini
 
-  ngOnInit(): void{ // Typage typeScript ==> methode qui ne renvoi rien ==> on peut le supprimer
+  /*ngOnInit(): void{ // Typage typeScript ==> methode qui ne renvoi rien ==> on peut le supprimer
     console.table(this.pokemons); //this car methode ne connait pas pokemons ici
-  }
+  }*/
 
-  selectPokemon(pokemonId: Pokemon){
+  /*selectPokemon(pokemonId: Pokemon){
     const id = +pokemonId;
     const pokemon: Pokemon|undefined = this.pokemons.find(pokemon => pokemon.id == +pokemonId); // |undefined car le find peut renvoyer null donc mettre les deux deux types ==> pokemon et undefined
     if(pokemon){
       this.pokemonSelected = pokemon;
-      console.log(`Vous avez cliqué sur le pokémon ${pokemon.name}`);
     }
 
     else{
       this.pokemonSelected = pokemon;
-      console.log("Ce pokémon n'est pas présent");
     }   
-  }
+  }*/
 
   /*selectPokemon(pokemon: Pokemon){
     console.log(`Vous avez cliqué sur le pokémon ${pokemon.name}`);
@@ -66,3 +62,10 @@ export class AppComponent implements OnInit{ // Décrire des proprités pour un 
 // date fait partie des pipes par défaut présent sur Angular, comme d'autres
 // Plusieurs pipes peuvent se suivre pour un même élément
 // Les pipes sont pratiques pour formater des données jugées trop brute à l'intérieur de nos templates
+
+// Les routes :
+// ==> Système de navigation
+// Doivent être regroupée au sein de module
+// Ex: Les routes pokemon ==> au même endroit
+// Les routes sont lues de haut en bas
+// ==> Déclarer routes spécifiques en haut et plus globales en bas
